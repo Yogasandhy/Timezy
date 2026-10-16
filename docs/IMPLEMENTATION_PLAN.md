@@ -20,7 +20,7 @@
 | Android release APK | Build berhasil untuk QA lokal; memakai debug signing |
 | Install/launch dan restart di HP fisik | Menunggu perangkat terhubung dan terotorisasi di ADB |
 | Build native iOS | Menunggu Mac/Xcode |
-| GitHub push | Remote sudah disetel; menunggu autentikasi GitHub |
+| GitHub push | Selesai; 9 commit di `main` sudah dipush ke `origin/main` |
 
 ## Toolchain yang digunakan
 

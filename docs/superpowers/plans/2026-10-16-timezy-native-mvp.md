@@ -37,7 +37,7 @@ Each domain/repository behavior starts with a focused failing test, then the imp
 - Node 22.13.1 and npm 10.7.0 are available; JDK 17 is available.
 - Android SDK folders exist at `D:\android` and under the user profile; `ANDROID_HOME` is not currently set in this shell. Use the SDK path supported by the generated template and valid installed packages.
 - `adb devices -l` currently reports no connected device. Do not start an emulator. This can block install/launch verification, not a Gradle APK build.
-- The workspace initially had no Git repository. The user later explicitly requested GitHub setup and detailed commits; the project is now initialized on `main` with `origin` set to the provided URL. GitHub authentication is still needed before push.
+- The workspace initially had no Git repository. The user later explicitly requested GitHub setup and detailed commits; the project is initialized on `main`, connected to the provided `origin`, and the commit history was pushed successfully.
 - Building iOS native code requires macOS/Xcode; this Windows host can only preserve the iOS project/source for later verification.
 
 ## Outcome
@@ -46,4 +46,4 @@ Each domain/repository behavior starts with a focused failing test, then the imp
 - Android debug and release APK builds succeed. Release is signed with the debug key for local QA only.
 - ADB lists no connected phone; no emulator was started, so physical install/launch/restart checks remain open.
 - Archify workflow source passes layout validation, but secure HTML artifact publication is blocked by a Windows file metadata mismatch; no rendered HTML is claimed as delivered.
-- Git remote setup is complete locally; pushes await GitHub authentication.
+- Git remote setup and push are complete; `main` tracks `origin/main`.
