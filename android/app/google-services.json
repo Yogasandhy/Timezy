@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "929177088793",
+    "project_id": "timezy-9a5f8",
+    "storage_bucket": "timezy-9a5f8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929177088793:android:647eb5b6168155a1410b88",
+        "android_client_info": {
+          "package_name": "com.timezy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD32aAlfFiApWBd1wf8XllNmJcPXFQEnhY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
