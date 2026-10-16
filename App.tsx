@@ -6,16 +6,18 @@
  */
 
 import React from 'react';
-import { StatusBar, Text, View } from 'react-native';
+import { StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { AppBootstrap } from './src/app/AppBootstrap';
+import { TaskProvider } from './src/features/tasks/state/TaskContext';
 
 export default function App() {
   return (
     <SafeAreaProvider>
       <StatusBar barStyle="dark-content" />
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Timezy</Text>
-      </View>
+      <TaskProvider>
+        <AppBootstrap />
+      </TaskProvider>
     </SafeAreaProvider>
   );
 }
