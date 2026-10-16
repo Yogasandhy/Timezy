@@ -71,6 +71,9 @@ yarn-error.log
 /graphify-out/
 /.agents/
 /Timezy/
+/skills-lock.json
+/docs/logo-concepts/preview-v*.html
+/docs/logo-concepts/renders-v*/
 
 # Local configuration and credentials
 .env
