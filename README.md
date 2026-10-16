@@ -1,6 +1,6 @@
 # Timezy
 
-Timezy is a personal, offline-first task planner for Android and iOS. It is a **bare React Native CLI + TypeScript** app; it does not use Expo. The MVP follows the selected **Quiet Steps** logo direction and a calm cream/green soft-neumorphic visual system.
+Timezy is a personal task planner for Android and iOS. It is a **bare React Native CLI + TypeScript** app; it does not use Expo. The MVP follows the selected **Quiet Steps** logo direction and a calm cream/green soft-neumorphic visual system.
 
 ## What works
 
@@ -9,8 +9,11 @@ Timezy is a personal, offline-first task planner for Android and iOS. It is a **
 - All Tasks view with status and priority filters.
 - Create, edit, complete/reopen, and delete tasks (with confirmation).
 - Optional notes, time, priority, and category.
-- Versioned on-device persistence through AsyncStorage; no account or network required.
+- Firebase Authentication (email/password and Google) with per-user Firestore task sync.
+- Existing AsyncStorage tasks are imported once on the first account sign-in and retained locally as a recovery copy.
 - English UI with accessible labels and large, clear touch controls.
+
+Firebase project provisioning is not complete yet: enable the Firestore API and Email/Password + Google providers, then create the default Jakarta database and deploy the rules. Follow [Firebase setup](docs/FIREBASE_SETUP.md).
 
 ## Run on a real Android phone
 
@@ -59,7 +62,8 @@ src/
   app/                         bootstrap and navigation
   features/tasks/
     domain/                    task model, local dates, filters, summary
-    data/                      versioned AsyncStorage repository
+    data/                      Firestore repository and legacy AsyncStorage migration
+  features/auth/               Firebase email/password and Google sign-in
     state/                     task provider
     screens/                   Today, Calendar, Tasks, task form
   shared/                      UI components and design tokens
@@ -69,7 +73,7 @@ docs/                          PRD, specs, setup, architecture, plan
 assets/quiet-steps.svg         selected C logo
 ```
 
-The repository boundary keeps persistence replaceable; cloud sync, accounts, reminders, recurrence, and team features are intentionally out of the MVP.
+The task repository keeps persistence separate from UI. Reminders, recurrence, and team features remain out of the MVP.
 
 ## Product and implementation docs
 
@@ -78,6 +82,7 @@ The repository boundary keeps persistence replaceable; cloud sync, accounts, rem
 - [Technical architecture](docs/ARCHITECTURE.md)
 - [Implementation plan](docs/IMPLEMENTATION_PLAN.md)
 - [Developer setup and device testing](docs/DEVELOPMENT.md)
+- [Firebase setup and provisioning](docs/FIREBASE_SETUP.md)
 - [Logo brief and selected concept](docs/LOGO_BRIEF.md)
 - [Selected logo asset](assets/quiet-steps.svg)
 - [MVP backlog](docs/BACKLOG.md)
