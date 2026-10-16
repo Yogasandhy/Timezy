@@ -12,9 +12,11 @@ import { ScreenLayout } from '../../../shared/components/ScreenLayout';
 import { Surface } from '../../../shared/components/Surface';
 import { TaskErrorBanner } from '../../../shared/components/TaskErrorBanner';
 import { TaskRow } from '../../../shared/components/TaskRow';
+import { useAuth } from '../../auth/state/AuthContext';
 
 export function CalendarScreen({ navigation }: TabScreenProps<'Calendar'>) {
   const { tasks, error, clearError, setTaskCompleted } = useTasks();
+  const { signOut } = useAuth();
   const today = getLocalDateKey();
   const [selectedDate, setSelectedDate] = useState(today);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
@@ -26,7 +28,7 @@ export function CalendarScreen({ navigation }: TabScreenProps<'Calendar'>) {
 
   return (
     <ScreenLayout>
-      <ScreenBrand eyebrow="PLAN AHEAD" title="Your planner" />
+      <ScreenBrand eyebrow="PLAN AHEAD" title="Your planner" onSignOut={() => { signOut().catch(() => undefined); }} />
       {error ? <TaskErrorBanner message={error} onDismiss={clearError} /> : null}
       <Surface style={styles.calendarCard}>
         <View style={styles.monthRow}>

@@ -12,6 +12,7 @@ import { colors, radii, spacing } from '../../../shared/theme/tokens';
 import { selectTasks, TaskStatusFilter } from '../domain/selectors';
 import { getLocalDateKey, TaskPriority } from '../domain/task';
 import { useTasks } from '../state/TaskContext';
+import { useAuth } from '../../auth/state/AuthContext';
 
 const statusOptions: { value: TaskStatusFilter; label: string }[] = [
   { value: 'all', label: 'All' }, { value: 'open', label: 'To do' }, { value: 'done', label: 'Done' },
@@ -22,6 +23,7 @@ const priorityOptions: { value: TaskPriority | 'any'; label: string }[] = [
 
 export function TasksScreen({ navigation }: TabScreenProps<'Tasks'>) {
   const { tasks, error, clearError, setTaskCompleted } = useTasks();
+  const { signOut } = useAuth();
   const [status, setStatus] = useState<TaskStatusFilter>('all');
   const [priority, setPriority] = useState<TaskPriority | 'any'>('any');
   const filtered = useMemo(() => selectTasks(tasks, { status, priority: priority === 'any' ? undefined : priority }), [tasks, status, priority]);
@@ -29,7 +31,7 @@ export function TasksScreen({ navigation }: TabScreenProps<'Tasks'>) {
 
   return (
     <ScreenLayout>
-      <ScreenBrand eyebrow={`${tasks.length} ${tasks.length === 1 ? 'TASK' : 'TASKS'} IN YOUR LIST`} title="Your tasks" />
+      <ScreenBrand eyebrow={`${tasks.length} ${tasks.length === 1 ? 'TASK' : 'TASKS'} IN YOUR LIST`} title="Your tasks" onSignOut={() => { signOut().catch(() => undefined); }} />
       {error ? <TaskErrorBanner message={error} onDismiss={clearError} /> : null}
       <View style={styles.filters}>
         {statusOptions.map(option => <FilterChip key={option.value} label={option.label} selected={status === option.value} onPress={() => setStatus(option.value)} />)}

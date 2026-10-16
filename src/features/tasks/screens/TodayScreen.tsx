@@ -12,9 +12,11 @@ import { ScreenLayout } from '../../../shared/components/ScreenLayout';
 import { Surface } from '../../../shared/components/Surface';
 import { TaskErrorBanner } from '../../../shared/components/TaskErrorBanner';
 import { TaskRow } from '../../../shared/components/TaskRow';
+import { useAuth } from '../../auth/state/AuthContext';
 
 export function TodayScreen({ navigation }: TabScreenProps<'Today'>) {
   const { tasks, error, clearError, setTaskCompleted } = useTasks();
+  const { signOut } = useAuth();
   const date = new Date();
   const today = getLocalDateKey(date);
   const greeting = date.getHours() < 12 ? 'Good morning' : date.getHours() < 18 ? 'Good afternoon' : 'Good evening';
@@ -26,7 +28,7 @@ export function TodayScreen({ navigation }: TabScreenProps<'Today'>) {
 
   return (
     <ScreenLayout>
-      <ScreenBrand eyebrow={readableDate} title={`${greeting}.`} />
+      <ScreenBrand eyebrow={readableDate} title={`${greeting}.`} onSignOut={() => { signOut().catch(() => undefined); }} />
       {error ? <TaskErrorBanner message={error} onDismiss={clearError} /> : null}
 
       <Surface style={styles.summaryCard}>

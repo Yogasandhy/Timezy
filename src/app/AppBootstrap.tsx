@@ -7,10 +7,13 @@ import { preferenceStorage } from '../features/tasks/data/localTaskRepository';
 import { useTasks } from '../features/tasks/state/TaskContext';
 import { colors, spacing } from '../shared/theme/tokens';
 import { PrimaryButton } from '../shared/components/PrimaryButton';
+import { useAuth } from '../features/auth/state/AuthContext';
+import { AuthScreen } from '../features/auth/screens/AuthScreen';
 
 const WELCOME_KEY = 'timezy.welcome.v1';
 
 export function AppBootstrap() {
+  const { user, initializing: authInitializing } = useAuth();
   const { loading, loaded, error, refresh } = useTasks();
   const [welcomeSeen, setWelcomeSeen] = useState<boolean | null>(null);
 
@@ -22,7 +25,16 @@ export function AppBootstrap() {
     return () => { active = false; };
   }, []);
 
-  if (loading || welcomeSeen === null) return <LoadingScreen />;
+  if (authInitializing || welcomeSeen === null || (user !== null && loading)) return <LoadingScreen />;
+
+  if (!welcomeSeen) {
+    return <WelcomeScreen onStart={() => {
+      setWelcomeSeen(true);
+      preferenceStorage.setItem(WELCOME_KEY, 'done').catch(() => undefined);
+    }} />;
+  }
+
+  if (!user) return <AuthScreen />;
 
   if (!loaded || error) {
     return (
@@ -33,13 +45,6 @@ export function AppBootstrap() {
         <PrimaryButton label="Try again" onPress={() => refresh()} style={styles.retry} />
       </View>
     );
-  }
-
-  if (!welcomeSeen) {
-    return <WelcomeScreen onStart={() => {
-      setWelcomeSeen(true);
-      preferenceStorage.setItem(WELCOME_KEY, 'done').catch(() => undefined);
-    }} />;
   }
 
   return <AppNavigation />;
