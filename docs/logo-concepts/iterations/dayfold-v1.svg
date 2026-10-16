@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Dayfold — v1</title>
+  <desc id="desc">An early folded-page silhouette study.</desc>
+  <path fill="#111111" d="M70 34h76l64 64v90q0 26-26 26H70q-28 0-28-28V62q0-28 28-28Zm76 0v48q0 16 16 16h48" fill-rule="evenodd"/>
+</svg>

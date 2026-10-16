@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Time Anchor</title>
+  <desc id="desc">A bold T letterform with a short offset foot, representing the next step in a day.</desc>
+  <path fill="#111111" d="M54 40h148q12 0 12 12v24q0 12-12 12h-54v76h36q12 0 12 12v16q0 12-12 12h-72q-12 0-12-12V88H54q-12 0-12-12V52q0-12 12-12Z"/>
+</svg>

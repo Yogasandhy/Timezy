@@ -1,0 +1,25 @@
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { colors, spacing } from '../theme/tokens';
+import { QuietStepsMark } from './QuietStepsMark';
+
+export function ScreenBrand({ eyebrow, title }: { eyebrow: string; title: string }) {
+  return (
+    <View style={styles.header}>
+      <View style={styles.brandLine}>
+        <QuietStepsMark size={25} />
+        <Text style={styles.brand}>Timezy</Text>
+        <Text style={styles.eyebrow}>{eyebrow}</Text>
+      </View>
+      <Text style={styles.title}>{title}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  header: { marginBottom: spacing.xl },
+  brandLine: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
+  brand: { color: colors.primary, fontWeight: '800', fontSize: 16, flex: 1 },
+  eyebrow: { color: colors.textSecondary, fontSize: 12, fontWeight: '700', letterSpacing: 0.8, textTransform: 'uppercase' },
+  title: { color: colors.textPrimary, fontSize: 28, fontWeight: '800', letterSpacing: -0.6, marginTop: spacing.md },
+});
