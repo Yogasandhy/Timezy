@@ -48,7 +48,7 @@ function isPriority(value: unknown): value is TaskPriority {
   return value === 'low' || value === 'normal' || value === 'high';
 }
 
-function isStoredTask(value: unknown): value is Task {
+export function isStoredTask(value: unknown): value is Task {
   if (!value || typeof value !== 'object') return false;
   const task = value as Partial<Task>;
   if (

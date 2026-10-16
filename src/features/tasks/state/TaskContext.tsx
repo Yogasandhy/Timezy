@@ -1,7 +1,8 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { Task, TaskDraft } from '../domain/task';
-import { taskRepository } from '../data/localTaskRepository';
+import { createFirebaseTaskRepository, FirebaseTaskRepository, migrateLocalTasksToCloud } from '../data/firebaseTaskRepository';
 import { RepositoryError } from '../data/taskRepository';
+import { useAuth } from '../../auth/state/AuthContext';
 
 type TaskContextValue = {
   tasks: Task[];
@@ -25,34 +26,83 @@ function errorMessage(error: unknown): string {
 }
 
 export function TaskProvider({ children }: { children: React.ReactNode }) {
+  const { user, initializing: authInitializing } = useAuth();
   const [tasks, setTasks] = useState<Task[]>([]);
   const [loading, setLoading] = useState(true);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [retryVersion, setRetryVersion] = useState(0);
+  const repositoryRef = useRef<FirebaseTaskRepository | null>(null);
+  const uid = user?.uid;
   const clearError = useCallback(() => setError(null), []);
 
   const refresh = useCallback(async () => {
     setLoading(true);
+    setLoaded(false);
     setError(null);
-    try {
-      setTasks(await taskRepository.getAll());
-      setLoaded(true);
-    } catch (loadError) {
-      setError(errorMessage(loadError));
-      setLoaded(false);
-    } finally {
-      setLoading(false);
-    }
+    setRetryVersion(version => version + 1);
   }, []);
 
-  useEffect(() => { refresh(); }, [refresh]);
+  useEffect(() => {
+    if (authInitializing) {
+      setLoading(true);
+      return;
+    }
 
-  const runMutation = useCallback(async <T,>(operation: () => Promise<T>, apply: (value: T) => void) => {
+    if (!uid) {
+      repositoryRef.current = null;
+      setTasks([]);
+      setError(null);
+      setLoaded(true);
+      setLoading(false);
+      return;
+    }
+
+    let active = true;
+    let unsubscribe: (() => void) | undefined;
+    const repository = createFirebaseTaskRepository(uid);
+    repositoryRef.current = repository;
+    setTasks([]);
+    setError(null);
+    setLoaded(false);
+    setLoading(true);
+
+    migrateLocalTasksToCloud(uid, repository)
+      .then(() => {
+        if (!active) return;
+        unsubscribe = repository.subscribeAll(nextTasks => {
+          if (!active) return;
+          setTasks(nextTasks);
+          setLoaded(true);
+          setLoading(false);
+          setError(null);
+        }, loadError => {
+          if (!active) return;
+          setError(errorMessage(loadError));
+          setLoaded(false);
+          setLoading(false);
+        });
+      })
+      .catch(loadError => {
+        if (!active) return;
+        setError(errorMessage(loadError));
+        setLoaded(false);
+        setLoading(false);
+      });
+
+    return () => {
+      active = false;
+      unsubscribe?.();
+      if (repositoryRef.current === repository) repositoryRef.current = null;
+    };
+  }, [uid, authInitializing, retryVersion]);
+
+  const runMutation = useCallback(async <T,>(operation: (repository: FirebaseTaskRepository) => Promise<T>) => {
     setError(null);
     try {
-      const value = await operation();
-      apply(value);
-      return value;
+      const repository = repositoryRef.current;
+      if (!repository) throw new Error('Sign in to sync and update your tasks.');
+      return await operation(repository);
     } catch (mutationError) {
       setError(errorMessage(mutationError));
       throw mutationError;
@@ -60,23 +110,19 @@ export function TaskProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const createTask = useCallback((draft: TaskDraft) => runMutation(
-    () => taskRepository.create(draft),
-    task => setTasks(current => [...current, task]),
+    repository => repository.create(draft),
   ), [runMutation]);
 
   const updateTask = useCallback((id: string, draft: TaskDraft) => runMutation(
-    () => taskRepository.update(id, draft),
-    task => setTasks(current => current.map(item => item.id === id ? task : item)),
+    repository => repository.update(id, draft),
   ), [runMutation]);
 
   const setTaskCompleted = useCallback((id: string, completed: boolean) => runMutation(
-    () => taskRepository.setCompleted(id, completed),
-    task => setTasks(current => current.map(item => item.id === id ? task : item)),
+    repository => repository.setCompleted(id, completed),
   ), [runMutation]);
 
   const deleteTask = useCallback((id: string) => runMutation<void>(
-    () => taskRepository.delete(id),
-    () => setTasks(current => current.filter(item => item.id !== id)),
+    repository => repository.delete(id),
   ), [runMutation]);
 
   const value = useMemo<TaskContextValue>(() => ({
