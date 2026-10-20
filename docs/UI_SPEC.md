@@ -73,6 +73,9 @@ Ruang: kelipatan 4/8 dp. Radius kartu: 20–24 dp. Tombol utama: tinggi minimal 
 
 ### Task form
 
+- Neumorphic raised cards group the task title, schedule, priority, category, and notes; recessed inputs have a visible green focus outline.
+- Today/Tomorrow shortcuts accompany the calendar picker; time stays optional. Category suggestions never prevent a custom category.
+- The create and edit forms respect top and bottom safe areas. Keyboard avoidance and focused-field scrolling also apply to authentication fields, including changes of focus while the keyboard is already open.
 - Field judul wajib dan catatan opsional.
 - Date picker; waktu opsional.
 - Prioritas tiga tingkat dan kategori opsional.
@@ -81,7 +84,20 @@ Ruang: kelipatan 4/8 dp. Radius kartu: 20–24 dp. Tombol utama: tinggi minimal 
 
 ## Navigasi
 
-Bottom tabs: **Today**, **Calendar**, **Tasks**. Task form/detail ditampilkan sebagai stack route di atas tab. Tab aktif memiliki ikon, label, dan indikator visual; jangan mengandalkan warna saja.
+Bottom tabs: **Today**, **Planner**, **Tasks**, **Insights**, **Profile**. The rounded raised navigation dock uses Material 3-inspired active indicator pills, consistent native icons, persistent labels, and bottom safe-area padding. Task form/detail ditampilkan sebagai stack route di atas tab. Tab aktif memiliki ikon, label, dan indikator visual; jangan mengandalkan warna saja.
+
+### Insights
+
+- Summarize planned, completed, and remaining tasks for the current Monday–Sunday week, using each task's due date.
+- Show a daily planned/completed chart and a category breakdown from the signed-in user's task list.
+- Surface overdue and open high-priority counts, with overdue tasks available to complete or reschedule.
+- Show the next few open tasks with shortcuts to edit or complete them. Empty states explain what will populate each section.
+
+### Profile
+
+- Show the signed-in account's name, avatar or initials, email, sign-in provider, and task totals.
+- Sign out lives here, with a confirmation dialog and visible error/retry handling. It is removed from the Today, Planner, and Tasks headers.
+- Account information and task counts come from the existing Auth and Task providers; no placeholder settings or additional account services.
 
 ## Motion dan feedback
 

@@ -7,6 +7,7 @@ Timezy is a personal task planner for Android and iOS. It is a **bare React Nati
 - Today dashboard with local-date task counts, completion progress, and an empty state.
 - Weekly calendar with date selection and tasks for the selected day.
 - All Tasks view with status and priority filters.
+- Insights dashboard with a weekly completion chart, category breakdown, overdue tasks, and upcoming priorities.
 - Create, edit, complete/reopen, and delete tasks (with confirmation).
 - Optional notes, time, priority, and category.
 - Firebase Authentication (email/password and Google) with per-user Firestore task sync.
