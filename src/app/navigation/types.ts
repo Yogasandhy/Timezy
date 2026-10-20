@@ -11,11 +11,16 @@ export type MainTabParamList = {
   Today: undefined;
   Calendar: undefined;
   Tasks: undefined;
+  Profile: undefined;
 };
 
-export type TabScreenProps<T extends keyof MainTabParamList> = CompositeScreenProps<
-  BottomTabScreenProps<MainTabParamList, T>,
-  NativeStackScreenProps<RootStackParamList>
->;
+export type TabScreenProps<T extends keyof MainTabParamList> =
+  CompositeScreenProps<
+    BottomTabScreenProps<MainTabParamList, T>,
+    NativeStackScreenProps<RootStackParamList>
+  >;
 
-export type TaskFormScreenProps = NativeStackScreenProps<RootStackParamList, 'TaskForm'>;
+export type TaskFormScreenProps = NativeStackScreenProps<
+  RootStackParamList,
+  'TaskForm'
+>;
