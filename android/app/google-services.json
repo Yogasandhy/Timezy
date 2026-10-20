@@ -12,7 +12,20 @@
           "package_name": "com.timezy"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "929177088793-4v71r824os40l3pb78u5r68nnck8dj2p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.timezy",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "929177088793-nus336kmshj1dtih26sufc05obdkdqjo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyD32aAlfFiApWBd1wf8XllNmJcPXFQEnhY"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "929177088793-nus336kmshj1dtih26sufc05obdkdqjo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "929177088793-iabgsdcupaakbr9vasbchb5kgg62kcr4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.timezy"
+              }
+            }
+          ]
         }
       }
     }
