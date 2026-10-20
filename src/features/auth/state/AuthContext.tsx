@@ -48,6 +48,10 @@ function readableAuthError(error: unknown): string {
   }
 }
 
+function traceGoogleSignIn(step: string): void {
+  if (__DEV__) console.info(`[auth/google] ${step}`);
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [initializing, setInitializing] = useState(true);
@@ -64,6 +68,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       await operation();
     } catch (cause) {
+      if (__DEV__) console.warn('[auth] Operation failed:', readableAuthError(cause));
       setError(readableAuthError(cause));
       throw cause;
     }
@@ -78,16 +83,25 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   ), [run]);
 
   const signInWithGoogle = useCallback(() => run(async () => {
+    traceGoogleSignIn('Configuring Google Sign-In');
     GoogleOneTapSignIn.configure({ webClientId: 'autoDetect' });
+    traceGoogleSignIn('Checking Google Play services');
     await GoogleOneTapSignIn.checkPlayServices();
-    let response = await GoogleOneTapSignIn.signIn();
-    if (isNoSavedCredentialFoundResponse(response)) response = await GoogleOneTapSignIn.createAccount();
-    if (isNoSavedCredentialFoundResponse(response)) response = await GoogleOneTapSignIn.presentExplicitSignIn();
+    traceGoogleSignIn('Opening explicit Google account picker');
+    // A button tap should open the explicit picker directly. Waiting for the
+    // One Tap bottom sheet first can leave this fallback unreachable if it hangs.
+    const response = await GoogleOneTapSignIn.presentExplicitSignIn();
+    traceGoogleSignIn(`Account picker returned: ${response.type}`);
     if (isCancelledResponse(response)) return;
+    if (isNoSavedCredentialFoundResponse(response)) {
+      throw new Error('No Google account is available. Add or sign back into a Google account on this device and try again.');
+    }
     if (!isSuccessResponse(response) || !response.data.idToken) {
       throw new Error('Google did not return a sign-in token. Check your OAuth setup and try again.');
     }
+    traceGoogleSignIn('Signing in to Firebase');
     await signInWithCredential(auth, GoogleAuthProvider.credential(response.data.idToken));
+    traceGoogleSignIn('Firebase sign-in completed');
   }), [run]);
 
   const sendPasswordReset = useCallback((email: string) => run(
