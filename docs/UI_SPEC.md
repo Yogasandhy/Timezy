@@ -41,6 +41,11 @@ Ruang: kelipatan 4/8 dp. Radius kartu: 20–24 dp. Tombol utama: tinggi minimal 
 
 ## Informasi layar
 
+### Splash dan startup
+
+- Android system splash and iOS launch storyboard share the Quiet Steps mark and the `#F2F4EA` canvas background.
+- While authentication or task data initializes, the in-app loading screen continues with the same mark and background.
+
 ### Welcome
 
 - Logo/nama Timezy.

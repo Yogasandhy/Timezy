@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "quiet-steps.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

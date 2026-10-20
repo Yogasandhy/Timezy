@@ -3,10 +3,14 @@ import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { colors, spacing } from '../shared/theme/tokens';
 import { QuietStepsMark } from '../shared/components/QuietStepsMark';
 
-export function LoadingScreen({ message = 'Getting your day ready…' }: { message?: string }) {
+export function LoadingScreen({
+  message = 'Getting your day ready…',
+}: {
+  message?: string;
+}) {
   return (
     <View style={styles.container}>
-      <QuietStepsMark size={52} />
+      <QuietStepsMark size={72} />
       <ActivityIndicator color={colors.primary} style={styles.spinner} />
       <Text style={styles.message}>{message}</Text>
     </View>
@@ -14,7 +18,17 @@ export function LoadingScreen({ message = 'Getting your day ready…' }: { messa
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.canvas, alignItems: 'center', justifyContent: 'center', padding: spacing.xxxl },
+  container: {
+    flex: 1,
+    backgroundColor: colors.canvas,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: spacing.xxxl,
+  },
   spinner: { marginTop: spacing.xl },
-  message: { color: colors.textSecondary, marginTop: spacing.md, textAlign: 'center' },
+  message: {
+    color: colors.textSecondary,
+    marginTop: spacing.md,
+    textAlign: 'center',
+  },
 });
