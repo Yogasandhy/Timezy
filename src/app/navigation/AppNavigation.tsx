@@ -10,6 +10,7 @@ import { TaskFormScreen } from '../../features/tasks/screens/TaskFormScreen';
 import { TasksScreen } from '../../features/tasks/screens/TasksScreen';
 import { TodayScreen } from '../../features/tasks/screens/TodayScreen';
 import { ProfileScreen } from '../../features/profile/screens/ProfileScreen';
+import { InsightsScreen } from '../../features/tasks/screens/InsightsScreen';
 import { colors } from '../../shared/theme/tokens';
 import { MainTabParamList, RootStackParamList } from './types';
 import { NeumorphicTabBar } from './NeumorphicTabBar';
@@ -36,6 +37,7 @@ function MainTabs() {
         options={{ tabBarLabel: 'Planner' }}
       />
       <Tabs.Screen name="Tasks" component={TasksScreen} />
+      <Tabs.Screen name="Insights" component={InsightsScreen} />
       <Tabs.Screen name="Profile" component={ProfileScreen} />
     </Tabs.Navigator>
   );

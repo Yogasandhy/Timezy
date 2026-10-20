@@ -16,7 +16,8 @@ export type AppIconName =
   | 'logout'
   | 'shield'
   | 'plus'
-  | 'arrow';
+  | 'arrow'
+  | 'insights';
 
 /** Small, consistent native icons; no font loading or additional native module. */
 export function AppIcon({
@@ -164,6 +165,20 @@ export function AppIcon({
         <>
           <View style={[styles.exitLine, styles.fullArrowLine, ink]} />
           <View style={[styles.arrowTip, stroke]} />
+        </>
+      );
+      break;
+    case 'insights':
+      shape = (
+        <>
+          <View style={[styles.insightAxis, stroke]} />
+          {[
+            { left: 8, height: 5 },
+            { left: 13, height: 10 },
+            { left: 18, height: 15 },
+          ].map(bar => (
+            <View key={bar.left} style={[styles.insightBar, ink, bar]} />
+          ))}
         </>
       );
       break;
@@ -426,5 +441,21 @@ const styles = StyleSheet.create({
     width: 2,
     height: 14,
     borderRadius: 1,
+  },
+  insightAxis: {
+    position: 'absolute',
+    left: 4,
+    top: 3,
+    width: 17,
+    height: 18,
+    borderLeftWidth: 1.8,
+    borderBottomWidth: 1.8,
+    borderBottomLeftRadius: 2,
+  },
+  insightBar: {
+    position: 'absolute',
+    bottom: 4,
+    width: 3,
+    borderRadius: 2,
   },
 });

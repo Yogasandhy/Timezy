@@ -9,6 +9,7 @@ const icons: Record<string, AppIconName> = {
   Today: 'today',
   Calendar: 'calendar',
   Tasks: 'tasks',
+  Insights: 'insights',
   Profile: 'profile',
 };
 

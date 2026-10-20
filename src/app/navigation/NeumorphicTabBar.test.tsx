@@ -11,7 +11,7 @@ describe('bottom navigation', () => {
   let renderer: ReactTestRenderer.ReactTestRenderer;
   const navigate = jest.fn();
   const emit = jest.fn();
-  const routes = ['Today', 'Calendar', 'Tasks', 'Profile'].map(
+  const routes = ['Today', 'Calendar', 'Tasks', 'Insights', 'Profile'].map(
     name => ({
       key: name,
       name,
