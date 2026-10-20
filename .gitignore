@@ -75,6 +75,10 @@ yarn-error.log
 /skills-lock.json
 /docs/logo-concepts/preview-v*.html
 /docs/logo-concepts/renders-v*/
+/docs/diagrams/graphify-out/cache/
+/docs/diagrams/graphify-out/.graphify_labels*
+/docs/diagrams/graphify-out/.graphify_root
+**/.archify-delivery-lock.json
 
 # Local configuration and credentials
 .env

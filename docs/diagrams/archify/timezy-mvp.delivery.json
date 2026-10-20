@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "e357fdae-b568-474c-88df-5d06ea4ce1d3",
+  "status": "current",
+  "command": "deliver",
+  "type": "workflow",
+  "input": "D:\\Projects\\task\\.archify\\workflow-timezy-mvp-20261016-102135\\candidate.json",
+  "output": "D:\\Projects\\task\\docs\\diagrams\\archify\\timezy-mvp.html",
+  "specification": {
+    "sha256": "0841576a05896d4c631b9533364e3461a34e5b04abf8d06e0f4928eb2f17541e",
+    "bytes": 3876
+  },
+  "artifact": {
+    "sha256": "e2b7dbebb56568e454f9143a5d5e90aa33e18561abd2b41db593516cb5d0bb92",
+    "bytes": 822106
+  }
+}

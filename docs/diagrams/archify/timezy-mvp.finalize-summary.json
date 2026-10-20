@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "workflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\Projects\\task\\.archify\\workflow-timezy-mvp-20261016-102135\\candidate.json",
+    "sha256": "0841576a05896d4c631b9533364e3461a34e5b04abf8d06e0f4928eb2f17541e",
+    "bytes": 3876
+  },
+  "artifact": {
+    "path": "D:\\Projects\\task\\docs\\diagrams\\archify\\timezy-mvp.html",
+    "sha256": "e2b7dbebb56568e454f9143a5d5e90aa33e18561abd2b41db593516cb5d0bb92",
+    "bytes": 822106
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "fail"
+  },
+  "failedStage": "browser-check",
+  "diagnostics": [
+    {
+      "code": "viewer/browser-check-runtime",
+      "severity": "error",
+      "message": "browser-check could not complete its Chrome inspection.",
+      "subject": {
+        "artifact": "D:\\Projects\\task\\docs\\diagrams\\archify\\timezy-mvp.html"
+      },
+      "evidence": {
+        "reason": "The private visual-check artifact snapshot changed during inspection."
+      },
+      "supportedFixes": [
+        "resolve the reported Chrome inspection error, then rerun browser-check"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\Projects\\task\\docs\\diagrams\\archify\\timezy-mvp.finalize.json",
+    "summaryReceipt": "D:\\Projects\\task\\docs\\diagrams\\archify\\timezy-mvp.finalize-summary.json",
+    "browserCheckReceipt": "D:\\Projects\\task\\docs\\diagrams\\archify\\timezy-mvp.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 2326
+}

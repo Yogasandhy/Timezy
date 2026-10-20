@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "workflow",
+  "quality": "showcase",
+  "startedAt": "2026-10-20T03:18:29.602Z",
+  "specification": {
+    "path": "D:\\Projects\\task\\.archify\\workflow-timezy-mvp-20261016-102135\\candidate.json",
+    "sha256": "49220d250d497861ba4c8ab07c21059b8e2b3fbe0bf8b10a5a8789eacdebdbf5",
+    "bytes": 3868
+  },
+  "artifact": {
+    "path": "D:\\Projects\\task\\docs\\diagrams\\timezy-mvp.html"
+  },
+  "stages": {
+    "validate": {
+      "status": "not-run",
+      "execution": "embedded-in-deliver"
+    },
+    "deliver": {
+      "status": "fail",
+      "exitCode": 1,
+      "durationMs": 120,
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "D:\\Projects\\task\\.agents\\skills\\archify\\bin\\archify.mjs",
+        "deliver",
+        "workflow",
+        "D:\\Projects\\task\\.archify\\workflow-timezy-mvp-20261016-102135\\candidate.json",
+        "D:\\Projects\\task\\docs\\diagrams\\timezy-mvp.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "D:\\Projects\\task",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "deliver",
+        "receiptId": "24956a08-bd79-44b1-b13b-47d8ca72b745",
+        "stage": "prepare",
+        "type": "workflow",
+        "input": "D:\\Projects\\task\\.archify\\workflow-timezy-mvp-20261016-102135\\candidate.json",
+        "output": "D:\\Projects\\task\\docs\\diagrams\\timezy-mvp.html",
+        "error": "Could not start delivery for \"D:\\Projects\\task\\docs\\diagrams\\timezy-mvp.html\": Delivery ownership was lost while attempting to release the delivery lock: an owned lock path no longer names the entry created by this attempt",
+        "diagnostics": [
+          {
+            "code": "delivery/ownership-lost",
+            "severity": "error",
+            "message": "Delivery ownership was lost for \"D:\\Projects\\task\\docs\\diagrams\\timezy-mvp.html\": Delivery ownership was lost while attempting to release the delivery lock: an owned lock path no longer names the entry created by this attempt",
+            "subject": {
+              "output": "D:\\Projects\\task\\docs\\diagrams\\timezy-mvp.html",
+              "lock": "D:\\Projects\\task\\docs\\diagrams\\.archify-delivery-lock.json"
+            },
+            "evidence": {
+              "reason": "an owned lock path no longer names the entry created by this attempt",
+              "operation": "release the delivery lock",
+              "lock": "D:\\Projects\\task\\docs\\diagrams\\.archify-delivery-lock.json",
+              "expectedReceiptId": "24956a08-bd79-44b1-b13b-47d8ca72b745",
+              "initializationError": "Delivery lock path identity could not be verified safely."
+            },
+            "supportedFixes": [
+              "leave the replacement lock and journal untouched, inspect the reported owner, then retry only after that attempt finishes or is recovered"
+            ]
+          }
+        ],
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      }
+    }
+  },
+  "diagnostics": [
+    {
+      "code": "delivery/ownership-lost",
+      "severity": "error",
+      "message": "Delivery ownership was lost for \"D:\\Projects\\task\\docs\\diagrams\\timezy-mvp.html\": Delivery ownership was lost while attempting to release the delivery lock: an owned lock path no longer names the entry created by this attempt",
+      "subject": {
+        "output": "D:\\Projects\\task\\docs\\diagrams\\timezy-mvp.html",
+        "lock": "D:\\Projects\\task\\docs\\diagrams\\.archify-delivery-lock.json"
+      },
+      "evidence": {
+        "reason": "an owned lock path no longer names the entry created by this attempt",
+        "operation": "release the delivery lock",
+        "lock": "D:\\Projects\\task\\docs\\diagrams\\.archify-delivery-lock.json",
+        "expectedReceiptId": "24956a08-bd79-44b1-b13b-47d8ca72b745",
+        "initializationError": "Delivery lock path identity could not be verified safely."
+      },
+      "supportedFixes": [
+        "leave the replacement lock and journal untouched, inspect the reported owner, then retry only after that attempt finishes or is recovered"
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "D:\\Projects\\task\\docs\\diagrams\\timezy-mvp.finalize.json",
+    "summaryReceipt": "D:\\Projects\\task\\docs\\diagrams\\timezy-mvp.finalize-summary.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "deliver",
+  "finishedAt": "2026-10-20T03:18:29.902Z",
+  "durationMs": 300,
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "invalid-local-release"
+  }
+}

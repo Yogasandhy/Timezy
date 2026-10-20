@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "fail",
+  "type": "workflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "D:\\Projects\\task\\.archify\\workflow-timezy-mvp-20261016-102135\\candidate.json",
+    "sha256": "49220d250d497861ba4c8ab07c21059b8e2b3fbe0bf8b10a5a8789eacdebdbf5",
+    "bytes": 3868
+  },
+  "artifact": {
+    "path": "D:\\Projects\\task\\docs\\diagrams\\timezy-mvp.html"
+  },
+  "gates": {
+    "validate": "not-run",
+    "deliver": "fail",
+    "check": "not-run",
+    "browser-check": "not-run"
+  },
+  "failedStage": "deliver",
+  "diagnostics": [
+    {
+      "code": "delivery/ownership-lost",
+      "severity": "error",
+      "message": "Delivery ownership was lost for \"D:\\Projects\\task\\docs\\diagrams\\timezy-mvp.html\": Delivery ownership was lost while attempting to release the delivery lock: an owned lock path no longer names the entry created by this attempt",
+      "subject": {
+        "output": "D:\\Projects\\task\\docs\\diagrams\\timezy-mvp.html",
+        "lock": "D:\\Projects\\task\\docs\\diagrams\\.archify-delivery-lock.json"
+      },
+      "evidence": {
+        "reason": "an owned lock path no longer names the entry created by this attempt",
+        "operation": "release the delivery lock",
+        "lock": "D:\\Projects\\task\\docs\\diagrams\\.archify-delivery-lock.json",
+        "expectedReceiptId": "24956a08-bd79-44b1-b13b-47d8ca72b745",
+        "initializationError": "Delivery lock path identity could not be verified safely."
+      },
+      "supportedFixes": [
+        "leave the replacement lock and journal untouched, inspect the reported owner, then retry only after that attempt finishes or is recovered"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "D:\\Projects\\task\\docs\\diagrams\\timezy-mvp.finalize.json",
+    "summaryReceipt": "D:\\Projects\\task\\docs\\diagrams\\timezy-mvp.finalize-summary.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 300
+}
